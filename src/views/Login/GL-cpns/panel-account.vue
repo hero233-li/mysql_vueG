@@ -44,6 +44,20 @@ const size = ref('large')
 const labelPosition = ref('right')
 
 const AccountFormRef = ref<FormInstance>()
+const openSuccess = message => {
+  ElMessage({
+    showClose: false,
+    message,
+    type: 'success'
+  })
+}
+const openError = message => {
+  ElMessage({
+    showClose: true,
+    message,
+    type: 'error'
+  })
+}
 
 const LoginForm = reactive<IAccountLoginForm>({
   account: localCache.getCache(ACCOUNT) ?? '',
@@ -69,28 +83,23 @@ watch(RememberMe, (newValue) => {
   localCache.setCache(REMEMBERME, newValue)
 })
 const LoginActive = () => {
-  console.log('账号登录')
   AccountFormRef.value?.validate((valid) => {
     if (valid) {
-      console.log('ok')
       const account = LoginForm.account
       const iphoneReg =
         /^(?:(?:\+|00)86)?1(?:(?:3[\d])|(?:4[5-79])|(?:5[0-35-9])|(?:6[5-7])|(?:7[0-8])|(?:8[\d])|(?:9[1589]))\d{8}$/
       let emailReg =
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      console.log(iphoneReg.test(account))
       const password = LoginForm.password
       if (iphoneReg.test(account)) {
         const iphone = account
-        console.log(iphone)
-        loginStore.LoginIphoneAction({ iphone, password }).then((res) => {
-          if (RememberMe.value) {
-            localCache.setCache(ACCOUNT, account)
-            localCache.setCache(PASSWORD, password)
-          } else {
-            localCache.removeCache(ACCOUNT)
-            localCache.removeCache(PASSWORD)
-          }
+
+        const result= loginStore.LoginIphoneAction({ iphone, password })
+        result.then(res=>{
+          if (res.code===0){
+            openSuccess(res.message)
+          }else openError(res.message)
+        }).catch(reason => {
         })
       } else {
         loginStore.LoginAccountAction({ account, password }).then((res) => {

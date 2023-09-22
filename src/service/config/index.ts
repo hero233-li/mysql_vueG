@@ -11,9 +11,9 @@
 
 let BASE_URL = ''
 if (import.meta.env.PROD) {
-  BASE_URL = 'http://127.0.0.1:8177/api'
+  BASE_URL = 'http://127.0.0.1:5173'
 } else {
-  BASE_URL = 'http://127.0.0.1:8177/api'
+  BASE_URL = 'http://127.0.0.1:5173'
 }
 
 // console.log(BASE_URL)

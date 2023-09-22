@@ -5,6 +5,8 @@ import type {
   IAccountLoginForm,
   IIphoneLoginForm
 } from '@/types/Login/login'
+import { localCache } from "@/utils/catch";
+import { LOGIN_TOKEN } from "@/global/constants";
 
 /**
  * 手机验证码登录
@@ -12,7 +14,7 @@ import type {
  */
 export function iphoneLoginRequest(iphoneData: IIphoneLoginForm) {
   return glRequest.post({
-    url: '/login/iphone',
+    url: '/test',
     data: iphoneData
   })
 }
@@ -22,9 +24,8 @@ export function iphoneLoginRequest(iphoneData: IIphoneLoginForm) {
  * @param accountData
  */
 export function accountLoginRequest(accountData: IAccountLoginForm) {
-  console.log(accountData)
   return glRequest.post({
-    url: '/user/login/account',
+    url: '/api/user/login/account',
     data: accountData
   })
 }
@@ -34,11 +35,13 @@ export function accountLoginRequest(accountData: IAccountLoginForm) {
  * @param accountData
  */
 export function accountIphoneLoginRequest(accountData: IAccountIphoneLoginForm) {
-  console.log(accountData)
-  return glRequest.post({
-    url: '/user/login/iphone',
-    data: accountData
+   return  glRequest.post({
+    // url:'/api/user/list',
+    url:"/api/login/iphone",
+    data:accountData
   })
+
+
 }
 
 /**
@@ -46,15 +49,14 @@ export function accountIphoneLoginRequest(accountData: IAccountIphoneLoginForm) 
  * @param accountData
  */
 export function accountEmailLoginRequest(accountData: IAccountEmailLoginForm) {
-  console.log(accountData)
   return glRequest.post({
-    url: '/user/login/email',
+    url: '/api/user/login/email',
     data: accountData
   })
 }
 
-export function getUserInfoById(id: number) {
+export function getUserInfoById() {
   return glRequest.get({
-    url: `/users/${id}`
+    url: `/api/login/query/`,
   })
 }
