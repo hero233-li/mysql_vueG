@@ -5,8 +5,6 @@ import type {
   IAccountLoginForm,
   IIphoneLoginForm
 } from '@/types/Login/login'
-import { localCache } from "@/utils/catch";
-import { LOGIN_TOKEN } from "@/global/constants";
 
 /**
  * 手机验证码登录
@@ -35,13 +33,11 @@ export function accountLoginRequest(accountData: IAccountLoginForm) {
  * @param accountData
  */
 export function accountIphoneLoginRequest(accountData: IAccountIphoneLoginForm) {
-   return  glRequest.post({
+  return glRequest.post({
     // url:'/api/user/list',
-    url:"/api/login/iphone",
-    data:accountData
+    url: '/api/login/iphone',
+    data: accountData
   })
-
-
 }
 
 /**
@@ -57,6 +53,11 @@ export function accountEmailLoginRequest(accountData: IAccountEmailLoginForm) {
 
 export function getUserInfoById() {
   return glRequest.get({
-    url: `/api/login/query/`,
+    url: `/api/login/query/`
+  })
+}
+export function getUserMenusRequest() {
+  return glRequest.get({
+    url: '/api/menu/queryUserMenu'
   })
 }

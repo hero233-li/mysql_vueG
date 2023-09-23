@@ -1,21 +1,27 @@
 <template>
   <div class="G-main">
-    <template>
-      <div class="common-layout">
+    <div class="common-layout">
+      <el-container>
+        <el-aside :width="isCollapse ? '3%' : '10%'">
+          <main-menu :isCollapse="isCollapse" />
+        </el-aside>
         <el-container>
-          <el-aside width="200px" height="100vh">
-            <Aside />
-          </el-aside>
-          <el-container>
-            <el-header>Header</el-header>
-            <el-main>Main</el-main>
-          </el-container>
+          <el-header height="48px">
+            <Header @flodChange="handFoldChange" />
+          </el-header>
+          <el-main>
+            <router-view></router-view>
+          </el-main>
         </el-container>
-      </div>
-    </template>
+      </el-container>
+    </div>
   </div>
 </template>
 <script setup lang="ts">
-import Aside from '@/views/main/Aside/Aside.vue'
+import Header from '@/components/main-header/mainHeader.vue'
+const isCollapse = ref(false)
+const handFoldChange = (isFold: boolean) => {
+  isCollapse.value = isFold
+}
 </script>
 <style scoped></style>

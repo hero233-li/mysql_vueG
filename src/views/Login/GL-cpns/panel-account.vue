@@ -44,14 +44,14 @@ const size = ref('large')
 const labelPosition = ref('right')
 
 const AccountFormRef = ref<FormInstance>()
-const openSuccess = message => {
+const openSuccess = (message) => {
   ElMessage({
     showClose: false,
     message,
     type: 'success'
   })
 }
-const openError = message => {
+const openError = (message) => {
   ElMessage({
     showClose: true,
     message,
@@ -93,16 +93,14 @@ const LoginActive = () => {
       const password = LoginForm.password
       if (iphoneReg.test(account)) {
         const iphone = account
-
-        const result= loginStore.LoginIphoneAction({ iphone, password })
-        result.then(res=>{
-          if (res.code===0){
+        const result = loginStore.LoginIphoneAction({ iphone, password })
+        result.then((res) => {
+          if (res.code === 0) {
             openSuccess(res.message)
-          }else openError(res.message)
-        }).catch(reason => {
+          } else openError(res.message)
         })
       } else {
-        loginStore.LoginAccountAction({ account, password }).then((res) => {
+        loginStore.LoginAccountAction({ account, password }).then(() => {
           if (RememberMe.value) {
             localCache.setCache(ACCOUNT, account)
             localCache.setCache(PASSWORD, password)
