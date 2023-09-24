@@ -25,6 +25,15 @@ const handFoldChange = (isFold: boolean) => {
 }
 </script>
 <style scoped>
+.el-main {
+  background-color: #f5f5f5;
+  position: absolute;
+  left: 200px;
+  right: 0;
+  top: 60px;
+  bottom: 0;
+  overflow-y: scroll;
+}
 .elSide {
   display: block;
   position: absolute;
