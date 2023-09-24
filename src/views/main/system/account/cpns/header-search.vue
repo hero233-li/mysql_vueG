@@ -42,6 +42,7 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { ElForm } from 'element-plus'
+import { Delete, Search } from '@element-plus/icons-vue'
 
 const searchForm = reactive({
   username: '',

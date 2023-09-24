@@ -7,8 +7,7 @@ const RoleManageStore = defineStore('Role', {
   }),
   actions: {
     async queryRoleList() {
-      const list = await queryRoleRequest()
-      this.entireRole = list
+      this.entireRole = await queryRoleRequest()
     }
   }
 })

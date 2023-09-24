@@ -7,8 +7,7 @@ const DepartmentManageStore = defineStore('Department', {
   }),
   actions: {
     async queryDepartmentList() {
-      const list = await queryDepartmentRequest()
-      this.entireDepartment = list
+      this.entireDepartment = await queryDepartmentRequest()
     }
   }
 })

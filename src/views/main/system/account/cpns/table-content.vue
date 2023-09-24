@@ -76,10 +76,8 @@ import type { ISearchFrom } from '@/types/system/account/account'
 
 import { reactive, ref } from 'vue'
 import { storeToRefs } from 'pinia'
-import { Check, Close, Delete, Edit, Hide, Refresh, View } from '@element-plus/icons-vue'
-import login from '@/store/Login/login'
-import { formatUTC } from '../../../../../utils/timeFormate'
-import AccountModal from '@/views/main/system/account/cpns/accountModal.vue'
+import { Check, Close, Delete, Edit, Hide, Plus, Refresh, View } from '@element-plus/icons-vue'
+import { formatUTC } from '@/utils/timeFormate'
 const emit = defineEmits(['newBtnClick'])
 
 const dataPerPage = ref(10)
