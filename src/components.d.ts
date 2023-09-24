@@ -7,10 +7,12 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
-    Header: typeof import('./components/main-header/Header.vue')['default']
-    MainHeader: typeof import('./components/main-header/mainHeader.vue')['default']
-    MainMenu: typeof import('./components/main-menu/main-menu.vue')['default']
-    RouterLink: typeof import('vue-router')['RouterLink']
-    RouterView: typeof import('vue-router')['RouterView']
+    Header: (typeof import('./components/main-header/Header.vue'))['default']
+    HeaderSearch: (typeof import('./views/main/system/account/cpns/header-search.vue'))['default']
+    MainHeader: (typeof import('./components/main-header/mainHeader.vue'))['default']
+    MainMenu: (typeof import('./components/main-menu/main-menu.vue'))['default']
+    RouterLink: (typeof import('vue-router'))['RouterLink']
+    RouterView: (typeof import('vue-router'))['RouterView']
+    TableContent: (typeof import('./views/main/system/account/cpns/table-content.vue'))['default']
   }
 }

@@ -2,11 +2,11 @@
   <div class="G-main">
     <div class="common-layout">
       <el-container>
-        <el-aside :width="isCollapse ? '3%' : '10%'">
+        <el-aside class="elSide" :width="isCollapse ? '3%' : '10%'">
           <main-menu :isCollapse="isCollapse" />
         </el-aside>
         <el-container>
-          <el-header height="48px">
+          <el-header class="el-header" height="48px">
             <Header @flodChange="handFoldChange" />
           </el-header>
           <el-main>
@@ -24,4 +24,27 @@ const handFoldChange = (isFold: boolean) => {
   isCollapse.value = isFold
 }
 </script>
-<style scoped></style>
+<style scoped>
+.el-main {
+  background-color: #f5f5f5;
+  position: absolute;
+  left: 200px;
+  right: 0;
+  top: 60px;
+  bottom: 0;
+  overflow-y: scroll;
+}
+.elSide {
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 60px;
+  bottom: 0;
+  background-color: #faf7fa;
+}
+.el-header {
+  position: relative;
+  width: 100%;
+  height: 60px;
+}
+</style>

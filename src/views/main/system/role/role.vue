@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div class="role">role</div>
+  <div class="role"><h2>待搭建</h2></div>
 </template>
 
 <style scoped></style>

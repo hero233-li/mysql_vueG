@@ -5,10 +5,10 @@
       <!--    default-active="5"     选中活跃item，item的index值-->
       <el-menu
         :default-active="defaultActive"
-        text-color="#b7bdc8"
+        text-color="#00000"
         :collapse="props.isCollapse"
-        active-text-color="#fff"
-        background-color="#001529"
+        active-text-color="#009688"
+        background-color="#faf7fa"
       >
         <template v-for="item in userMenus" :key="menu_group_id">
           <el-sub-menu :index="item.menu_group_id + ''">
@@ -57,8 +57,8 @@ const handleItemClick = (item) => {
 </script>
 <style scoped>
 .main-menu {
-  height: 100vh;
-  background-color: #79aaaa;
+  //height: 100vh;
+  background-color: #faf7fa;
 }
 .logo {
   display: flex;

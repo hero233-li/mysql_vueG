@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { AllMenuRequest } from '@/service/System/MenuManagement/MenuManagement'
+import { AllMenuRequest } from '@/service/System/Menu/MenuManagement'
 
 const menuManageStore = defineStore('menu', {
   state: () => ({

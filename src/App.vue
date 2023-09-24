@@ -1,10 +1,13 @@
 <template>
   <div class="app">
-    <router-view />
+    <el-config-provider :locale="locale">
+      <router-view />
+    </el-config-provider>
   </div>
 </template>
 <script setup lang="ts">
-import GMain from '@/views/main/G-main.vue'
+import zhCn from 'element-plus/es/locale/lang/zh-cn'
+const locale = zhCn
 </script>
 <style scoped>
 .app {

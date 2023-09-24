@@ -10,6 +10,8 @@ import { localCache } from '@/utils/catch'
 import router from '@/router'
 import { LOGIN_TOKEN, USERINFO, USERMENU } from '@/global/constants'
 import { mapMenusToRouters } from '@/utils/map-menu'
+import DepartmentManageStore from '@/store/Department/Department'
+import RoleManageStore from '@/store/Role/Role'
 interface ILoginState {
   token: string
   userinfo: any
@@ -54,6 +56,11 @@ const useLoginStore = defineStore('login', {
         localCache.setCache(USERINFO, userInfoResult)
         localCache.setCache(USERMENU, userMenusResult)
 
+        const departStore = DepartmentManageStore()
+        const roleStore = RoleManageStore()
+        departStore.queryDepartmentList()
+        roleStore.queryRoleList()
+
         //获取到与当前账号相匹配的路由，遍历全部注册到name为/GMain的子组件下
         const routes = mapMenusToRouters(this.userMenus)
         routes.forEach((route) => router.addRoute('/GMain', route))
@@ -76,6 +83,10 @@ const useLoginStore = defineStore('login', {
         this.token = token
         this.userinfo = userInfo
         this.userMenus = userMenu
+        const departStore = DepartmentManageStore()
+        const roleStore = RoleManageStore()
+        departStore.queryDepartmentList().then()
+        roleStore.queryRoleList().then()
         // 添加路由
         const routes = mapMenusToRouters(this.userMenus)
         routes.forEach((route) => router.addRoute('/GMain', route))
