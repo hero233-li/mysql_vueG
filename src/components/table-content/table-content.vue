@@ -1,11 +1,11 @@
 <template>
   <div class="table-content">
     <div class="table-title">
-      <span>用户列表</span>
+      <span>{{ contentConfig?.header?.title ?? '数据列表' }}</span>
       <div class="btn">
         <el-button type="primary" @click="handleClickNewAccount">
           <el-icon><Plus /></el-icon>
-          <span>新建用户</span>
+          <span>{{ contentConfig?.header?.btnTitle ?? '新建数据' }}</span>
         </el-button>
         <el-button @click="fetchAccountData">
           <el-icon><Refresh /></el-icon>
@@ -15,52 +15,16 @@
     </div>
     <div class="table">
       <el-table style="width: 100%" :data="accountList">
-        <el-table-column fixed type="index" align="center" label="序号" width="100" />
-        <el-table-column align="center" prop="useraccount" label="用户名" width="100" />
-        <el-table-column prop="username" align="center" label="昵称" width="150" />
-        <el-table-column prop="useremail" align="center" label="邮箱" width="200" />
-        <el-table-column prop="useriphone" align="center" label="手机号" width="200" />
-        <el-table-column prop="createTime" align="center" label="创建时间" width="200">
-          <template #default="scope">
-            {{ formatUTC(scope.row.createTime) }}
+        <template v-for="item in contentConfig.propList" :key="item.prop">
+          <el-table-column v-bind="item" />
+          <template v-if="(item.type = timer)">
+            <el-table-column v-bind="item">
+              <template #default="scope">
+                {{ formatUTC(scope.row[item.prop]) }}
+              </template>
+            </el-table-column>
           </template>
-        </el-table-column>
-        <el-table-column prop="userrole" align="center" label="账号角色" width="200">
-          <template #default="scope">
-            {{ roleNames[scope.row.userrole] }}
-          </template>
-        </el-table-column>
-
-        <el-table-column prop="userstate" align="center" label="账号状态" width="150">
-          <template #default="scope">
-            <!-- 如果插槽的值为 el-switch，第一次加载会默认触发 switch 的 @change 方法，所有在外层包一个盒子，点击触发盒子 click 方法（暂时只能这样解决） -->
-            <div @click="changeStatus(scope.row)">
-              <el-switch
-                :model-value="scope.row.userstate"
-                :active-text="scope.row.userstate === 1 ? '启用' : '禁用'"
-                :active-value="1"
-                :inactive-value="0"
-              />
-            </div>
-          </template>
-        </el-table-column>
-        <el-table-column fixed="right" align="center" label="操作">
-          <template #default="scope">
-            <el-button :icon="Edit" size="small" text @click="handleClickEditAccount(scope.row)">
-              编辑
-            </el-button>
-
-            <el-button :icon="Refresh" size="small" text>重置密码</el-button>
-            <el-button
-              type="danger"
-              :icon="Delete"
-              size="small"
-              text
-              @click="handleClickDelete(scope.row.uuid)"
-              >删除</el-button
-            >
-          </template>
-        </el-table-column>
+        </template>
       </el-table>
     </div>
     <div class="pagination">
@@ -85,9 +49,17 @@ import { storeToRefs } from 'pinia'
 import { Check, Close, Delete, Edit, Hide, Plus, Refresh, View } from '@element-plus/icons-vue'
 import { formatUTC } from '@/utils/timeFormate'
 import RoleManageStore from '@/store/Role/Role'
-import login from '@/store/Login/login'
 const emit = defineEmits(['newBtnClick', 'EditAccountClick'])
-
+interface IProps {
+  contentConfig: {
+    header?: {
+      title?: string
+      btnTitle?: string
+    }
+    propList: any[]
+  }
+}
+const props = defineProps<IProps>()
 const dataPerPage = ref(10)
 const fewPages = ref(0)
 let searchFromData: ISearchFrom = {
@@ -144,26 +116,13 @@ const handleClickEditAccount = (item) => {
   emit('EditAccountClick', item)
 }
 const roleStore = RoleManageStore()
+const userrolePromiseResolved = false
 
-const roleNames: [] = ref({})
-const loadRoleNames = async () => {
-  const roleName = await roleStore.queryRoleName() // 替换为正确的获取角色名称的函数
-  for (let key = 0, i = 0; i < roleName.length; ) {
-    const id = roleName[i].role_id
-    const name = roleName[i].role_name
-    if (id === key) {
-      i++
-      roleNames.value[key] = name
-    } else {
-      key++
-      roleNames.value[key] = ''
-    }
-  }
+const queryRoleName = async (item) => {
+  const result = await roleStore.queryRoleName(item)
+  console.log(result)
+  return result
 }
-onMounted(async () => {
-  // 在组件挂载后加载角色名称
-  await loadRoleNames()
-})
 </script>
 
 <style scoped>

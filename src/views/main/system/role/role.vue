@@ -1,7 +1,10 @@
-<script setup lang="ts"></script>
-
 <template>
-  <div class="role"><h2>待搭建</h2></div>
+  <div class="role">
+    <header-search :search-config="roleSearchConfig" />
+  </div>
 </template>
+<script setup lang="ts">
+import roleSearchConfig from '@/views/main/system/role/config/role.search.config'
+</script>
 
 <style scoped></style>

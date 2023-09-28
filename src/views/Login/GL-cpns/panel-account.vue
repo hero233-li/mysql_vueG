@@ -91,25 +91,28 @@ const LoginActive = () => {
       let emailReg =
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       const password = LoginForm.password
+      let result = {}
       if (iphoneReg.test(account)) {
         const iphone = account
-        const result = loginStore.LoginIphoneAction({ iphone, password })
-        result.then((res) => {
-          if (res.code === 0) {
-            openSuccess(res.message)
-          } else openError(res.message)
-        })
+        result = loginStore.LoginAccountAction({ iphone, password })
+      } else if (emailReg.test(account)) {
+        const email = account
+        result = loginStore.LoginAccountAction({ email, password })
       } else {
-        loginStore.LoginAccountAction({ account, password }).then(() => {
-          if (RememberMe.value) {
-            localCache.setCache(ACCOUNT, account)
-            localCache.setCache(PASSWORD, password)
-          } else {
-            localCache.removeCache(ACCOUNT)
-            localCache.removeCache(PASSWORD)
-          }
-        })
+        result = loginStore.LoginAccountAction({ account, password })
       }
+      result.then((res) => {
+        if (res.code === 0) {
+          openSuccess(res.message)
+        } else openError(res.message)
+        if (RememberMe.value) {
+          localCache.setCache(ACCOUNT, account)
+          localCache.setCache(PASSWORD, password)
+        } else {
+          localCache.removeCache(ACCOUNT)
+          localCache.removeCache(PASSWORD)
+        }
+      })
     } else {
       console.log('error')
     }

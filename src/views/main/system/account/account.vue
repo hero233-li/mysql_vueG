@@ -1,7 +1,11 @@
 <template>
   <div class="account">
     <header-search @queryClick="handleClickSearch" @reset-click="handleClickReset" />
-    <table-content ref="tableContentRef" @new-btn-click="handleClickNewBtn" />
+    <table-content
+      ref="tableContentRef"
+      @new-btn-click="handleClickNewBtn"
+      @EditAccountClick="handleClickEditBtn"
+    />
     <account-modal ref="accountModalRef" />
   </div>
 </template>
@@ -12,7 +16,10 @@ import AccountModal from '@/views/main/system/account/cpns/accountModal.vue'
 const handleClickSearch = (fromData: any) => {
   tableContentRef.value?.fetchAccountData(fromData)
 }
-
+const handleClickEditBtn = (item) => {
+  accountModalRef.value?.changeDialogVisible()
+  accountModalRef.value?.updateDialogForm(item)
+}
 const handleClickNewBtn = () => {
   accountModalRef.value?.changeDialogVisible()
 }

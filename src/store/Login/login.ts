@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import type { IAccountIphoneLoginForm, IAccountLoginForm } from '@/types/Login/login'
 import {
+  accountEmailLoginRequest,
   accountIphoneLoginRequest,
   accountLoginRequest,
   getUserInfoById,
@@ -29,42 +30,42 @@ const useLoginStore = defineStore('login', {
      * @param accountData
      * @constructor
      */
-    async LoginAccountAction(accountData: IAccountLoginForm) {
-      const loginResult = await accountLoginRequest({ accountData })
-      this.token = loginResult.data.token
-      localCache.setCache(LOGIN_TOKEN, this.token)
-      await router.push('/GMain')
-    },
     /**
      * 手机号登录
      * @param accountData
      * @constructor
      */
-    async LoginIphoneAction(accountData: IAccountIphoneLoginForm) {
-      const loginResult = await accountIphoneLoginRequest({ accountData })
+    async LoginAccountAction(accountData) {
+      console.log(accountData.account)
+      let loginResult = {}
+      if (accountData.iphone) {
+        console.log(accountData.iphone)
+        loginResult = await accountIphoneLoginRequest({ accountData })
+      } else if (accountData.email) {
+        console.log(accountData.email)
+        loginResult = await accountEmailLoginRequest({ accountData })
+      } else if (accountData.account) {
+        console.log(accountData.account)
+        loginResult = await accountLoginRequest({ accountData })
+      }
+
       if (loginResult.code === 0) {
         this.token = loginResult.data.token
         localCache.setCache(LOGIN_TOKEN, this.token)
-
         const userInfoResult = await getUserInfoById()
         this.userinfo = userInfoResult
-
         const userMenusResult = await getUserMenusRequest()
-
         this.userMenus = userMenusResult
-
         localCache.setCache(USERINFO, userInfoResult)
         localCache.setCache(USERMENU, userMenusResult)
-
         const departStore = DepartmentManageStore()
         const roleStore = RoleManageStore()
-        departStore.queryDepartmentList()
-        roleStore.queryRoleList()
-
+        await departStore.queryDepartmentList()
+        await roleStore.queryRoleList()
         //获取到与当前账号相匹配的路由，遍历全部注册到name为/GMain的子组件下
         const routes = mapMenusToRouters(this.userMenus)
         routes.forEach((route) => router.addRoute('/GMain', route))
-
+        console.log(222)
         await router.push('/GMain')
       }
       return loginResult

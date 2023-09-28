@@ -48,11 +48,11 @@ declare module 'vue' {
     ElTimeline: typeof import('element-plus/es')['ElTimeline']
     ElTimelineItem: typeof import('element-plus/es')['ElTimelineItem']
     Header: (typeof import('./src/components/main-header/Header.vue'))['default']
-    HeaderSearch: (typeof import('@/views/main/system/account/cpns/header-search.vue'))['default']
+    HeaderSearch: typeof import('./src/components/header-search/header-search.vue')['default']
     MainHeader: typeof import('./src/components/main-header/mainHeader.vue')['default']
     MainMenu: typeof import('./src/components/main-menu/main-menu.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    TableContent: (typeof import('@/views/main/system/account/cpns/table-content.vue'))['default']
+    TableContent: typeof import('./src/components/table-content/table-content.vue')['default']
   }
 }

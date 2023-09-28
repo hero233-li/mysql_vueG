@@ -23,3 +23,15 @@ export function addAccountRequest(accountData: IAccountModal) {
     data: accountData
   })
 }
+export function editAccountRequest(accountData: IAccountModal) {
+  return glRequest.post({
+    url: '/api/account/editAccount',
+    data: accountData
+  })
+}
+export function editAccountStateRequest(accountData: ISearchFrom) {
+  return glRequest.post({
+    url: '/api/account/editState',
+    data: accountData
+  })
+}

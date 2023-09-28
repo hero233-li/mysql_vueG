@@ -9,6 +9,7 @@ export interface ISearchFrom {
   offset: number
 }
 export interface IAccountModal {
+  uuid: string
   username: string
   useraccount: string
   useremail: string

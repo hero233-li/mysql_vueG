@@ -23,7 +23,7 @@ export function iphoneLoginRequest(iphoneData: IIphoneLoginForm) {
  */
 export function accountLoginRequest(accountData: IAccountLoginForm) {
   return glRequest.post({
-    url: '/api/user/login/account',
+    url: '/api/login/account',
     data: accountData
   })
 }
@@ -46,7 +46,7 @@ export function accountIphoneLoginRequest(accountData: IAccountIphoneLoginForm) 
  */
 export function accountEmailLoginRequest(accountData: IAccountEmailLoginForm) {
   return glRequest.post({
-    url: '/api/user/login/email',
+    url: '/api/login/email',
     data: accountData
   })
 }

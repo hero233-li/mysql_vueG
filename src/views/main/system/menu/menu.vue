@@ -1,7 +1,9 @@
-<script setup lang="ts"></script>
-
 <template>
-  <div class="menu"><h2>待搭建</h2></div>
+  <div class="menu">
+    <header-search :search-config="menuSearchConfig" />
+  </div>
 </template>
-
+<script setup lang="ts">
+import menuSearchConfig from '@/views/main/system/menu/config/menu.search.config'
+</script>
 <style scoped></style>

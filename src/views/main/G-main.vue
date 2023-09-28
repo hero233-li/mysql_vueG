@@ -9,7 +9,7 @@
           <el-header class="el-header" height="48px">
             <Header @flodChange="handFoldChange" />
           </el-header>
-          <el-main>
+          <el-main class="el-main">
             <router-view></router-view>
           </el-main>
         </el-container>

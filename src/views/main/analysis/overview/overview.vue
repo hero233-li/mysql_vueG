@@ -19,6 +19,12 @@
       <el-table-column prop="DD" label="DD" width="400" align="center" />
     </el-table>
     <el-timeline>
+      <el-timeline-item timestamp="2023/9/28" placement="top">
+        <el-card>
+          <h4>搜索框的抽取</h4>
+          <p>实现了搜索框的抽取，确定了整体的项目范围</p>
+        </el-card>
+      </el-timeline-item>
       <el-timeline-item timestamp="2023/9/24" placement="top">
         <el-card>
           <h4>动态路由，用户管理界面的搭建，后端数据的获取</h4>
