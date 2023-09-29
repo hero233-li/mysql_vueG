@@ -17,7 +17,7 @@ declare module 'vue' {
     ElCol: typeof import('element-plus/es')['ElCol']
     ElConfigProvider: typeof import('element-plus/es')['ElConfigProvider']
     ElContainer: typeof import('element-plus/es')['ElContainer']
-    ElDatePicker: typeof import('element-plus/es')['ElDatePicker']
+    ElDatePicker: (typeof import('element-plus/es'))['ElDatePicker']
     ElDialog: typeof import('element-plus/es')['ElDialog']
     ElDropdown: typeof import('element-plus/es')['ElDropdown']
     ElDropdownItem: typeof import('element-plus/es')['ElDropdownItem']
@@ -51,8 +51,10 @@ declare module 'vue' {
     HeaderSearch: typeof import('./src/components/header-search/header-search.vue')['default']
     MainHeader: typeof import('./src/components/main-header/mainHeader.vue')['default']
     MainMenu: typeof import('./src/components/main-menu/main-menu.vue')['default']
+    PageModal: (typeof import('./src/components/pageModal/pageModal.vue'))['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     TableContent: typeof import('./src/components/table-content/table-content.vue')['default']
+    TableModal: typeof import('./src/components/tableModal/tableModal.vue')['default']
   }
 }

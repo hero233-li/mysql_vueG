@@ -1,5 +1,5 @@
-const departmentContentConfig = {
-  pageName: 'department',
+const roleContentConfig = {
+  pageName: 'role',
   header: {
     title: '部门列表',
     btnTitle: '新建部门'
@@ -15,7 +15,7 @@ const departmentContentConfig = {
     },
     {
       fixed: false,
-      type: 'tree',
+      type: 'normal',
       prop: 'department_name',
       align: 'center',
       label: '部门名称',
@@ -24,11 +24,19 @@ const departmentContentConfig = {
     {
       fixed: false,
       type: 'custom',
-      prop: ' ',
+      prop: 'department_name',
       align: 'center',
       label: '部门名称',
       width: ' ',
       slotName: 'departmentName'
+    },
+    {
+      fixed: false,
+      type: 'timer',
+      prop: '',
+      align: 'center',
+      label: '创建时间',
+      width: ''
     },
     {
       fixed: false,
@@ -54,4 +62,4 @@ const departmentContentConfig = {
     }
   ]
 }
-export default departmentContentConfig
+export default roleContentConfig

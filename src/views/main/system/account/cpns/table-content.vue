@@ -77,14 +77,14 @@
   </div>
 </template>
 <script setup lang="ts">
-import AccountManageStore from '@/store/Account/Account'
+import AccountManageStore from '@/store/system/Account/Account'
 import type { ISearchFrom } from '@/types/system/account/account'
 
 import { reactive, ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { Check, Close, Delete, Edit, Hide, Plus, Refresh, View } from '@element-plus/icons-vue'
 import { formatUTC } from '@/utils/timeFormate'
-import RoleManageStore from '@/store/Role/Role'
+import RoleManageStore from '@/store/system/Role/Role'
 import login from '@/store/Login/login'
 const emit = defineEmits(['newBtnClick', 'EditAccountClick'])
 
@@ -146,24 +146,24 @@ const handleClickEditAccount = (item) => {
 const roleStore = RoleManageStore()
 
 const roleNames: [] = ref({})
-const loadRoleNames = async () => {
-  const roleName = await roleStore.queryRoleName() // 替换为正确的获取角色名称的函数
-  for (let key = 0, i = 0; i < roleName.length; ) {
-    const id = roleName[i].role_id
-    const name = roleName[i].role_name
-    if (id === key) {
-      i++
-      roleNames.value[key] = name
-    } else {
-      key++
-      roleNames.value[key] = ''
-    }
-  }
-}
-onMounted(async () => {
-  // 在组件挂载后加载角色名称
-  await loadRoleNames()
-})
+// const loadRoleNames = async () => {
+//   const roleName = await roleStore.queryRoleName() // 替换为正确的获取角色名称的函数
+//   for (let key = 0, i = 0; i < roleName.length; ) {
+//     const id = roleName[i].role_id
+//     const name = roleName[i].role_name
+//     if (id === key) {
+//       i++
+//       roleNames.value[key] = name
+//     } else {
+//       key++
+//       roleNames.value[key] = ''
+//     }
+//   }
+// }
+// onMounted(async () => {
+//   // 在组件挂载后加载角色名称
+//   await loadRoleNames()
+// })
 </script>
 
 <style scoped>

@@ -49,7 +49,7 @@ for (const item of props.searchConfig.formItems) {
 
 const searchForm = reactive({})
 const formRef = ref<InstanceType<typeof ElForm>>()
-const emit = defineEmits(['queryClick', 'resetClick'])
+const emit = defineEmits(['searchClick', 'clearClick'])
 
 const handleClickReset = () => {
   formRef.value?.resetFields()

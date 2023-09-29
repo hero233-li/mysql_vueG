@@ -1,1 +1,1 @@
-export * from '@/types/Login'
+export * from '@/types'

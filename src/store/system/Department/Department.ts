@@ -1,4 +1,3 @@
-import { queryDepartmentRequest } from '@/service/System/Department/Deapetment'
 import { defineStore } from 'pinia'
 
 const DepartmentManageStore = defineStore('Department', {
@@ -7,7 +6,7 @@ const DepartmentManageStore = defineStore('Department', {
   }),
   actions: {
     async queryDepartmentList() {
-      this.entireDepartment = await queryDepartmentRequest()
+      // this.entireDepartment = await queryDepartmentRequest()
     }
   }
 })

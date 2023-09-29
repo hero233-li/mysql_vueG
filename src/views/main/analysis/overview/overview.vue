@@ -19,6 +19,12 @@
       <el-table-column prop="DD" label="DD" width="400" align="center" />
     </el-table>
     <el-timeline>
+      <el-timeline-item timestamp="2023/9/29" placement="top">
+        <el-card>
+          <h4>树状表格实现，组件抽取</h4>
+          <p>实现了table-content的抽取，实现了table-madol的抽取，实现了树状表格</p>
+        </el-card>
+      </el-timeline-item>
       <el-timeline-item timestamp="2023/9/28" placement="top">
         <el-card>
           <h4>搜索框的抽取</h4>

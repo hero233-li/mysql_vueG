@@ -1,4 +1,4 @@
-import { queryRoleNameRequest, queryRoleRequest } from '@/service/System/Role/role'
+import { queryRoleRequest } from '@/service/System/Role/role'
 import { defineStore } from 'pinia'
 
 const RoleManageStore = defineStore('Role', {
@@ -10,7 +10,7 @@ const RoleManageStore = defineStore('Role', {
       this.entireRole = await queryRoleRequest()
     },
     async queryRoleName() {
-      return await queryRoleNameRequest()
+      // return await queryRoleNameRequest()
     }
   }
 })

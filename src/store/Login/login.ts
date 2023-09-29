@@ -11,8 +11,8 @@ import { localCache } from '@/utils/catch'
 import router from '@/router'
 import { LOGIN_TOKEN, USERINFO, USERMENU } from '@/global/constants'
 import { mapMenusToRouters } from '@/utils/map-menu'
-import DepartmentManageStore from '@/store/Department/Department'
-import RoleManageStore from '@/store/Role/Role'
+import DepartmentManageStore from '@/store/system/Department/Department'
+import RoleManageStore from '@/store/system/Role/Role'
 interface ILoginState {
   token: string
   userinfo: any

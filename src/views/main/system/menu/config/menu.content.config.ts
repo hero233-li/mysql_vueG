@@ -1,5 +1,5 @@
-const departmentContentConfig = {
-  pageName: 'department',
+const menuContentConfig = {
+  pageName: 'menu',
   header: {
     title: '部门列表',
     btnTitle: '新建部门'
@@ -15,20 +15,28 @@ const departmentContentConfig = {
     },
     {
       fixed: false,
-      type: 'tree',
-      prop: 'department_name',
+      type: 'normal',
+      prop: 'menu_name',
       align: 'center',
-      label: '部门名称',
+      label: '菜单名称',
       width: '100'
     },
     {
       fixed: false,
       type: 'custom',
-      prop: ' ',
+      prop: 'department_name',
       align: 'center',
       label: '部门名称',
       width: ' ',
       slotName: 'departmentName'
+    },
+    {
+      fixed: false,
+      type: 'timer',
+      prop: '',
+      align: 'center',
+      label: '创建时间',
+      width: ''
     },
     {
       fixed: false,
@@ -54,4 +62,4 @@ const departmentContentConfig = {
     }
   ]
 }
-export default departmentContentConfig
+export default menuContentConfig
