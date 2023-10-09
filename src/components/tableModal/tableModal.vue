@@ -15,6 +15,13 @@
               <template v-if="item.type === 'input'">
                 <el-input v-model="DialogForm.useraccount" v-bind="item" />
               </template>
+              <template v-else-if="item.type === 'select'">
+                <el-select placeholder="请选择" v-model="DialogForm[item.prop]">
+                  <template v-for="element in item.selectOption" :key="element.value">
+                    <el-option :label="element.label" :value="element.value" />
+                  </template>
+                </el-select>
+              </template>
             </el-form-item>
           </template>
         </el-form>
@@ -36,7 +43,11 @@ import RoleManageStore from '@/store/system/Role/Role'
 import { storeToRefs } from 'pinia'
 import { ElForm } from 'element-plus'
 import AccountManageStore from '@/store/system/Account/Account'
+import SystemManageStore from '@/store/system/system'
 
+/**
+ *todo！当前最优先的任务，完善新建页面和编辑页面的功能
+ */
 const departStore = DepartmentManageStore()
 const { entireDepartment } = storeToRefs(departStore)
 const roleStore = RoleManageStore()
@@ -47,6 +58,7 @@ interface IProp {
       newTitle: string
       editTitle: string
     }
+    pageName: string
     formItems: any[]
   }
 }
@@ -59,6 +71,7 @@ for (const item of props.modalConfig.formItems) {
   initialForm[item.prop] = item.initialValue ?? ''
 }
 let DialogForm = reactive<any>(initialForm)
+const systemStore = SystemManageStore()
 
 const accountStore = AccountManageStore()
 
@@ -68,15 +81,10 @@ const handleCancelClick = () => {
   changeDialogVisible()
 }
 const handleOKClick = () => {
-  if (DialogForm.uuid) {
-    console.log(DialogForm.uuid)
-    accountStore.editAccount(DialogForm)
-  } else {
-    accountStore.addAccount(DialogForm)
-  }
-  accountStore.queryAccountList()
+  systemStore.postAddAction(props.modalConfig.pageName, DialogForm)
+  systemStore.postQueryAllAction(props.modalConfig.pageName)
   formRef.value?.resetFields()
-  changeDialogVisible()
+  // changeDialogVisible()
 }
 
 const changeDialogVisible = () => {

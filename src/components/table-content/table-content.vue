@@ -61,7 +61,22 @@
           </template>
           <template v-else-if="item.type === 'tree'">
             <!--            当是tree的时候，需要专门写一个:prop="item.prop"，否则会不生效-->
-            <el-table-column :prop="item.prop" label="部门名称" width="180" />
+            <el-table-column :prop="item.prop" :label="item.label" width="180" />
+          </template>
+          <template v-else-if="item.type === 'status'">
+            <el-table-column v-bind="item">
+              <template #default="scope">
+                <!-- 如果插槽的值为 el-switch，第一次加载会默认触发 switch 的 @change 方法，所有在外层包一个盒子，点击触发盒子 click 方法（暂时只能这样解决） -->
+                <div @click="changeStatus(scope.row)">
+                  <el-switch
+                    :model-value="scope.row[item.prop]"
+                    :active-text="scope.row[item.prop] === 1 ? '启用' : '禁用'"
+                    :active-value="1"
+                    :inactive-value="0"
+                  />
+                </div>
+              </template>
+            </el-table-column>
           </template>
           <template v-else>
             <el-table-column v-bind="item" />
@@ -87,6 +102,12 @@ import { formatUTC } from '@/utils/timeFormate'
 import SystemManageStore from '@/store/system/system'
 import { storeToRefs } from 'pinia'
 
+/**
+ * 将系统管理的中心表格抽离出来，使用定义的接口，让各个界面传递相应的config获取相关的表字段
+ * todo：编辑功能未实现
+ * todo：删除功能，未测试完成
+ * todo：页面美化
+ */
 /**
  * 类型声明以及props返出
  */
@@ -134,6 +155,16 @@ const handleClickNewAccount = () => {
 }
 const handleClickEditAccount = (item: any) => {
   emit('EditAccountClick', item)
+}
+defineExpose({ fetchPageListData })
+/**
+ * 状态修改按钮
+ */
+const changeStatus = (item) => {
+  // item.prop = item.userstate === 0 ? 1 : 0
+  // console.log(item.userstate)
+  // accountStore.changeStatus(item)
+  systemStore.ChangeStatusAction(props.contentConfig.pageName, item)
 }
 </script>
 

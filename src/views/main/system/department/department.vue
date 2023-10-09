@@ -16,7 +16,7 @@
         <span class="name"> 客制化{{ scope.row[scope.prop] }}</span>
       </template>
     </table-content>
-    <table-modal :modal-config="departmentModalConfig" ref="tableModalRef" />
+    <table-modal :modal-config="modalConfigRef" ref="tableModalRef" />
   </div>
 </template>
 <script setup lang="ts">
@@ -25,19 +25,27 @@ import departmentContentConfig from '@/views/main/system/department/config/depar
 import departmentModalConfig from '@/views/main/system/department/config/department.modal.config'
 import headerSearch from '@/components/header-search/header-search.vue'
 import tableContent from '@/components/table-content/table-content.vue'
-const tableContentRef = ref()
+import DepartmentManageStore from '@/store/system/Department/Department'
+import useTableContent from '@/hooks/useTableContent'
 const tableModalRef = ref()
-const handleClickSearch = () => {
-  console.log(111)
-}
-const handleClickReset = () => {
-  console.log(111)
-}
+const { tableContentRef, handleClickReset, handleClickSearch } = useTableContent()
 const handleClickNewBtn = () => {
   tableModalRef.value?.changeDialogVisible()
 }
 const handleClickEditBtn = () => {
   console.log(122)
 }
+const modalConfigRef = computed(() => {
+  const departmentStore = DepartmentManageStore()
+  const departments = departmentStore.entireDepartmentGroup.map((item) => {
+    return { label: item.department_name, value: item.department_group_id }
+  })
+  departmentModalConfig.formItems.forEach((item) => {
+    if (item.prop === 'department_group_id') {
+      item.selectOption.push(...departments)
+    }
+  })
+  return departmentModalConfig
+})
 </script>
 <style scoped></style>

@@ -19,16 +19,32 @@ const departmentContentConfig = {
       prop: 'department_name',
       align: 'center',
       label: '部门名称',
-      width: '100'
+      width: ''
+    },
+    // {
+    //   fixed: false,
+    //   type: 'custom',
+    //   prop: ' ',
+    //   align: 'center',
+    //   label: '部门名称',
+    //   width: ' ',
+    //   slotName: 'departmentName'
+    // },
+    {
+      fixed: false,
+      type: 'timer',
+      prop: 'createTime',
+      align: 'center',
+      label: '创建时间',
+      width: ''
     },
     {
       fixed: false,
-      type: 'custom',
-      prop: ' ',
+      type: 'status',
+      prop: 'department_state',
       align: 'center',
-      label: '部门名称',
-      width: ' ',
-      slotName: 'departmentName'
+      label: '部门状态',
+      width: ''
     },
     {
       fixed: false,

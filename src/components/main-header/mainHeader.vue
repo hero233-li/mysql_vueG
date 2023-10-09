@@ -50,6 +50,12 @@ import useLoginStore from '@/store/Login/login'
 import { ArrowRight, Coin, SwitchButton } from '@element-plus/icons-vue'
 import { mapPathToBreadcrumb } from '@/utils/map-menu'
 import { useRoute } from 'vue-router'
+
+/**
+ * 右侧顶部工具栏，将该组件抽离出来，读取后端返回的菜单数据，动态写入面包屑中
+ * todo-1：功能还差标签tab页面没有实现
+ * todo-2：页面美化没有开展
+ */
 const route = useRoute()
 const userStore = useLoginStore()
 const userMenus = userStore.userMenus

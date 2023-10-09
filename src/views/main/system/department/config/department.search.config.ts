@@ -3,18 +3,18 @@ const departmentSearchConfig = {
     {
       span: 4,
       type: 'input',
-      prop: 'name',
+      prop: 'department_name',
       label: '部门名称',
       placeholder: '请输入',
-      initialValue: '123'
+      initialValue: ''
     },
     {
       span: 4,
       type: 'select',
-      prop: 'menu_group_state',
+      prop: 'department_state',
       label: '状态',
       placeholder: '请选择',
-      initialValue: '123',
+      initialValue: '1',
       selectOption: [
         {
           label: '启用',

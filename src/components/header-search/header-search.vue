@@ -36,6 +36,13 @@
 import { reactive, ref } from 'vue'
 import { ElForm } from 'element-plus'
 import { Delete, Search } from '@element-plus/icons-vue'
+
+/**
+ * 搜索框组件抽离，
+ * 设置一个默认传值类型，根据不同组件，而传入不同的config，使得显示和返回的字段不同，
+ * 且将确认和重置按钮事件返回到父组件，抽离为hooks函数，
+ * 该组件工作以及完成
+ */
 interface IProps {
   searchConfig: {
     formItems: any[]
@@ -50,18 +57,18 @@ for (const item of props.searchConfig.formItems) {
 const searchForm = reactive({})
 const formRef = ref<InstanceType<typeof ElForm>>()
 const emit = defineEmits(['searchClick', 'clearClick'])
-
+/**
+ * 搜索框组件的重置按钮和搜索按钮
+ */
 const handleClickReset = () => {
   formRef.value?.resetFields()
-  emit('resetClick', searchForm)
+  emit('clearClick', searchForm)
 }
 const handleClickSearch = () => {
-  emit('queryClick', searchForm)
+  emit('searchClick', searchForm)
 }
 </script>
 <style scoped>
-/* CSS Inspector (https://vben.vvbin.cn/#/system/account) */
-
 .header-search {
   background-color: rgb(255, 255, 255);
   border-radius: 2px;

@@ -99,7 +99,6 @@ const handleCancelClick = () => {
 }
 const handleOKClick = () => {
   if (DialogForm.uuid) {
-    console.log(DialogForm.uuid)
     accountStore.editAccount(DialogForm)
   } else {
     accountStore.addAccount(DialogForm)

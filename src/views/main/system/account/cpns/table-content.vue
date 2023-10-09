@@ -121,7 +121,6 @@ const value1 = ref(true)
 const currentPage = ref(1)
 const changeStatus = (item) => {
   item.userstate = item.userstate === 0 ? 1 : 0
-  console.log(item.userstate)
   accountStore.changeStatus(item)
 }
 const handleSizeChange = () => {

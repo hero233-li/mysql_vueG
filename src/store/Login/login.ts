@@ -39,13 +39,10 @@ const useLoginStore = defineStore('login', {
       console.log(accountData.account)
       let loginResult = {}
       if (accountData.iphone) {
-        console.log(accountData.iphone)
         loginResult = await accountIphoneLoginRequest({ accountData })
       } else if (accountData.email) {
-        console.log(accountData.email)
         loginResult = await accountEmailLoginRequest({ accountData })
       } else if (accountData.account) {
-        console.log(accountData.account)
         loginResult = await accountLoginRequest({ accountData })
       }
 
@@ -87,6 +84,7 @@ const useLoginStore = defineStore('login', {
         const departStore = DepartmentManageStore()
         const roleStore = RoleManageStore()
         departStore.queryDepartmentList().then()
+        departStore.queryGroupDepartment().then()
         roleStore.queryRoleList().then()
         // 添加路由
         const routes = mapMenusToRouters(this.userMenus)

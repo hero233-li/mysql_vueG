@@ -10,7 +10,7 @@
         active-text-color="#009688"
         background-color="#faf7fa"
       >
-        <template v-for="item in userMenus" :key="menu_group_id">
+        <template v-for="item in userMenus" :key="item.menu_group_id">
           <el-sub-menu :index="item.menu_group_id + ''">
             <template #title>
               <el-icon>
@@ -39,7 +39,10 @@ import { mapPathToPath } from '@/utils/map-menu'
 const userStore = useLoginStore()
 const userMenus = userStore.userMenus
 const route = useRoute()
-
+/**
+ * 左侧菜单栏，将组件抽离处理，读取后台传递的菜单数据，动态加载菜单信息
+ * todo：美化界面
+ */
 const defaultActive = computed(() => {
   const PathMenu = mapPathToPath(route.path, userMenus)
   return PathMenu.menu_id + ''
